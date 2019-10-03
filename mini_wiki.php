@@ -2,6 +2,7 @@
 
 $result = "";
 $error = "";
+$query = "";
 
 if (isset($_GET['wiki'])) {
 
@@ -20,6 +21,10 @@ if (isset($_GET['wiki'])) {
         $wiki1 = explode("<p>", $wikiPage);
         $wiki2 = explode("</p>", $wiki1[1]);
         $result = strip_tags($wiki2[0]);
+    }
+
+    if(strlen($query) === 0) {
+        $error = "Search something";
     }
 }
 
@@ -139,7 +144,7 @@ if (isset($_GET['wiki'])) {
         </div>
         <div class="row center" style="margin:auto;margin-top: 50px;">
             <?php
-            if ($result) { ?>
+            if ($query) { ?>
                 <div class="card text-left">
                     <div class="card-body">
                         <h5 class="card-title text-secondary"> <?php echo $query ?> </h5>
@@ -149,7 +154,7 @@ if (isset($_GET['wiki'])) {
                     </div>
                 </div>
             <?php } else if ($error) {
-                echo ('<div class="alert alert-danger answer" role="alert">' . $error . '</div>');
+                echo ('<div class="alert alert-warning answer" role="alert">' . $error . '</div>');
             }
             ?>
         </div>
